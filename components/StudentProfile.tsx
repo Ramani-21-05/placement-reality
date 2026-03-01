@@ -2,7 +2,11 @@
 
 import { useEffect } from "react";
 
-export default function StudentProfile() {
+type Props = {
+  onSave: () => void;
+};
+
+export default function StudentProfile({ onSave }: Props) {
 
   const handleSave = () => {
     const profile = {
@@ -15,6 +19,9 @@ export default function StudentProfile() {
     };
 
     localStorage.setItem("studentProfile", JSON.stringify(profile));
+
+    onSave(); // 🔥 refresh trigger
+
     alert("Profile Saved!");
   };
 
@@ -36,11 +43,7 @@ export default function StudentProfile() {
   return (
     <div className="space-y-4 border p-4">
 
-      <input
-        id="name"
-        placeholder="Enter Name"
-        className="border p-2 w-full"
-      />
+      <input id="name" placeholder="Enter Name" className="border p-2 w-full" />
 
       <select id="year" className="border p-2 w-full">
         <option value="">Select Year</option>
@@ -57,22 +60,12 @@ export default function StudentProfile() {
         <option>IT</option>
       </select>
 
-      <input
-        id="companies"
-        placeholder="Target Companies"
-        className="border p-2 w-full"
-      />
+      <input id="companies" placeholder="Target Companies" className="border p-2 w-full" />
 
-      <input
-        id="github"
-        placeholder="GitHub Username"
-        className="border p-2 w-full"
-      />
-      <input
-  id="leetcode"
-  placeholder="LeetCode Username"
-  className="border p-2 w-full"
-/>
+      <input id="github" placeholder="GitHub Username" className="border p-2 w-full" />
+
+      <input id="leetcode" placeholder="LeetCode Username" className="border p-2 w-full" />
+
       <button
         onClick={handleSave}
         className="bg-blue-500 text-white px-4 py-2"
